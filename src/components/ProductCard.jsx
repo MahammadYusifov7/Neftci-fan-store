@@ -12,10 +12,8 @@ export default function ProductCard({ product }) {
         e.preventDefault();
         setModalOpen(true);
     }
-    // Qlobal Context-dən məlumatları və funksiyanı çəkirik
     const { wishlist, toggleWishlist } = useContext(WishlistContext);
 
-    // Məhsulun qlobal wishlist massivində olub-olmadığını yoxlayırıq
     const isWishlisted = wishlist.some((item) => item.id === product.id);
 
     const hasDiscount = discountPercent > 0;
@@ -31,7 +29,7 @@ export default function ProductCard({ product }) {
             <button
                 onClick={(e) => {
                     e.preventDefault();
-                    toggleWishlist(product); // Lokal state əvəzinə qlobal funksiyanı çağırırıq
+                    toggleWishlist(product);
                 }}
                 className="absolute top-3 left-3 z-20 p-2 bg-white rounded-full shadow-md hover:scale-110 transition-all duration-300 cursor-pointer flex items-center justify-center group/wishlist"
             >

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer'; // Öz Footer komponentinin yolunu düzgün qeyd et
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Search from './pages/Search';
@@ -32,7 +32,6 @@ export default function App() {
 
             <div className='grow pt-20'>
               <Routes>
-                {/* Ana Səhifə */}
                 <Route path="/" element={<Home />} />
 
                 <Route path="/products" element={<Shop />} />

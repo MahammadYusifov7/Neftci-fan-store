@@ -15,14 +15,12 @@ export default function Login() {
         e.preventDefault();
         let newErrors = {};
 
-        // E-mail yoxlanışı
         if (!email.trim()) {
             newErrors.email = "E-mail ünvanı tələb olunur.";
         } else if (!emailRegex.test(email)) {
             newErrors.email = "Düzgün e-mail formatı daxil edin (məs: user@mail.com).";
         }
 
-        // Şifrə yoxlanışı
         if (!password) {
             newErrors.password = "Şifrə tələb olunur.";
         } else if (password.length < 6) {

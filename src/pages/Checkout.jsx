@@ -19,7 +19,6 @@ export default function Checkout() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-        // İstifadəçi yazdıqca həmin sahənin xətasını təmizləyirik
         setErrors(prev => ({ ...prev, [name]: '' }));
     };
 
@@ -46,7 +45,6 @@ export default function Checkout() {
             newErrors.surname = 'Soyad boş ola bilməz';
         }
 
-        // Azərbaycan telefon nömrəsi üçün sadə regex yoxlaması (məs: 0501234567 və ya +994...)
         const phoneRegex = /^(\+994|0)?(50|51|55|70|71|77|99|10)[0-9]{7}$/;
         const cleanPhone = formData.phone.replace(/\s+/g, '');
         if (!formData.phone.trim()) {

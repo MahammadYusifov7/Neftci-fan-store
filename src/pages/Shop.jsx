@@ -13,10 +13,8 @@ export default function Shop() {
     const subcategoryParam = searchParams.get("subcategory");
     const typeParam = searchParams.get("type");
     
-    // Sıralama parametrini birbaşa URL-dən oxuyuruq, yoxdursa default dəyəri veririk
     const sortOption = searchParams.get("sort") || "Endirim dərəcəsi azalır";
 
-    // DETALLI YOXLAMA: Parametrlərdən hər hansı biri saxtadırsa 404-ə yönləndirir
     if (categoryParam || subcategoryParam || typeParam) {
         let isValid = true;
 
@@ -37,7 +35,6 @@ export default function Shop() {
 
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-    // Sıralama dəyişəndə URL-ə yazırıq ki, refresh atanda silinməsin
     const setSortOption = (newSort) => {
         setSearchParams((prev) => {
             prev.set("sort", newSort);

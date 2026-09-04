@@ -12,7 +12,6 @@ function ProductDetails() {
     const { slug } = useParams();
     const product = AllProducts.find(p => p.slug === slug || p.id.toString() === slug);
 
-    // Bütün hook-lar və state-lər şərtdən əvvəl çağırılır
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [size, setSize] = useState(product?.sizes ? product.sizes[0] : '');
     const [quantity, setQuantity] = useState(1);
@@ -23,7 +22,6 @@ function ProductDetails() {
     const { wishlist, toggleWishlist } = useContext(WishlistContext);
     const { addToCart } = useContext(CartContext);
 
-    // Dinamik tab başlığı
     useEffect(() => {
         if (product) {
             document.title = `${product.title} - Neftçi Official Store`;
@@ -51,10 +49,9 @@ function ProductDetails() {
         toggleWishlist(product);
     };
 
-    // Səbətə əlavə et düyməsi kliklənəndə
     const handleAddToCart = () => {
         addToCart(product, size, quantity, customName, customNumber);
-        setIsCartOpen(true); // Səbət panelini açırıq
+        setIsCartOpen(true); 
     };
 
     return (

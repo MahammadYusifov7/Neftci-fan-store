@@ -11,30 +11,24 @@ export default function ContactUs() {
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState(false);
 
-    // Input dəyərlərini izləmək üçün
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-        // İstifadəçi yazdıqca həmin sahənin xətasını təmizləyirik
         setErrors((prev) => ({ ...prev, [name]: '' }));
     };
 
-    // Form göndəriləndə validation yoxlaması
     const handleSubmit = (e) => {
         e.preventDefault();
         let newErrors = {};
 
-        // Ad yoxlaması
         if (!formData.name.trim()) {
             newErrors.name = 'Ad boş ola bilməz';
         }
 
-        // Soyad yoxlaması
         if (!formData.surname.trim()) {
             newErrors.surname = 'Soyad boş ola bilməz';
         }
 
-        // Email regex yoxlaması
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!formData.email.trim()) {
             newErrors.email = 'E-mail boş ola bilməz';
@@ -42,7 +36,6 @@ export default function ContactUs() {
             newErrors.email = 'Düzgün e-mail daxil edin';
         }
 
-        // Mesaj yoxlaması
         if (!formData.message.trim()) {
             newErrors.message = 'Mesaj boş ola bilməz';
         }
@@ -50,7 +43,6 @@ export default function ContactUs() {
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
         } else {
-            // Hər şey qaydasındadırsa
             setSuccessMessage(true);
             setFormData({ name: '', surname: '', email: '', message: '' });
             setErrors({});

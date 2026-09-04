@@ -18,7 +18,6 @@ const categoriesList = [
 export default function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // URL-dən cari axtarış və kateqoriyaları oxuyuruq
     const searchQuery = searchParams.get("q") || "";
     const selectedCategories = searchParams.get("category") ? searchParams.get("category").split(",") : [];
     const sortOption = searchParams.get("sort") || "Sonuncu əlavə edilən";
@@ -26,7 +25,6 @@ export default function Search() {
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
     const [isSidebarCategoriesOpen, setIsSidebarCategoriesOpen] = useState(true);
 
-    // Axtarış inputu dəyişəndə URL-i yeniləyirik
     const handleSearchChange = (e) => {
         const val = e.target.value;
         setSearchParams((prev) => {
@@ -39,7 +37,6 @@ export default function Search() {
         });
     };
 
-    // Checkbox seçimlərini URL ilə idarə edən funksiya
     const handleCategoryCheckbox = (catValue) => {
         let updatedCategories = [...selectedCategories];
         if (updatedCategories.includes(catValue)) {
@@ -58,7 +55,6 @@ export default function Search() {
         });
     };
 
-    // Sıralama dəyişəndə URL-ə yazırıq
     const handleSortChange = (newSort) => {
         setSearchParams((prev) => {
             prev.set("sort", newSort);
@@ -66,7 +62,6 @@ export default function Search() {
         });
     };
 
-    // 1. Filtrləmə məntiqi
     let currentProducts = AllProducts;
 
     if (searchQuery.trim() !== "") {
@@ -79,7 +74,6 @@ export default function Search() {
         currentProducts = currentProducts.filter(p => selectedCategories.includes(p.category));
     }
 
-    // 2. Sıralama
     currentProducts = Sorting(currentProducts, sortOption);
 
     return (

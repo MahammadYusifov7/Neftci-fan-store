@@ -9,7 +9,7 @@ export default function VerticalSwiper({ images, setThumbsSwiper }) {
 
     return (
         <Swiper
-            onSwiper={setThumbsSwiper} // Ana Swiper ilə əlaqə qurmaq üçündür
+            onSwiper={setThumbsSwiper}
             direction={'vertical'}
             navigation={true}
             slidesPerView={4}

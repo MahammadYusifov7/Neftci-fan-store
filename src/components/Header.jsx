@@ -50,7 +50,6 @@ const menuConfig = [
             {
                 label: "Aksesuarlar",
                 value: "Aksesuarlar",
-                // 3-cü pillə (Teg/Növ)
                 types: [
                     { label: "Şərf", value: "Şərf" },
                     { label: "Təqvim", value: "Təqvim" },
@@ -60,7 +59,6 @@ const menuConfig = [
             {
                 label: "Suvenirlər",
                 value: "Suvenirlər",
-                // 3-cü pillə (Teg/Növ)
                 types: [
                     { label: "Avto-ətir", value: "Avto-ətir" },
                     { label: "Açarlıq", value: "Açarlıq" },
@@ -122,7 +120,6 @@ function Header() {
                                     <div className='absolute top-full left-0 hidden group-hover:block w-60 bg-white shadow-xl border-0 z-50'>
                                         <ul className='p-2'>
                                             {item.subcategories.map((sub, index) => (
-                                                // group/sub klası 3-cü pillənin açılması üçündür
                                                 <li key={index} className='relative group/sub'>
                                                     <Link
                                                         to={`/products?category=${item.category}&subcategory=${sub.value}`}
@@ -205,7 +202,6 @@ function Header() {
                                 {menuConfig.map((item) => (
                                     <li key={item.id}>
                                         {item.subcategories.length > 0 ? (
-                                            // Əgər alt menyusu varsa, sətri iki hissəyə bölürük: Başlıq (Link) və Ox (Düymə)
                                             <div className='flex items-center justify-between w-full'>
                                                 <Link
                                                     to={`/products?category=${item.category}`}
