@@ -30,7 +30,17 @@ const bannerSlides = [
 
 export default function HomeBanner() {
     return (
-        <div className="w-full h-[250px] sm:h-[350px] md:h-[500px] lg:h-[700px]">
+        <div className="w-full h-[250px] sm:h-[350px] md:h-[500px] lg:h-[700px] relative">
+            <style>
+                {`
+                    @media (max-width: 768px) {
+                        .swiper-button-next, 
+                        .swiper-button-prev {
+                            display: none !important;
+                        }
+                    }
+                `}
+            </style>
             <Swiper
                 style={{ "--swiper-navigation-color": "#fff", "--swiper-pagination-color": "#fff" }}
                 spaceBetween={0}

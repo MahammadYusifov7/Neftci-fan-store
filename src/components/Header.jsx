@@ -93,17 +93,17 @@ function Header() {
 
     return (
         <>
-            <nav className='flex items-center justify-between bg-white px-6 md:px-10 py-4 shadow-md fixed top-0 left-0 w-full z-50'>
+            <nav className='flex items-center justify-between bg-white px-4 md:px-8 py-4 shadow-md fixed top-0 left-0 w-full z-50'>
 
                 {/* SOL HİSSƏ: LOGO VƏ DESKTOP MENU */}
-                <div className='flex items-center gap-3 font-bold'>
+                <div className='flex items-center font-bold'>
                     <div className='w-36'>
                         <Link to="/" onClick={() => setOpenmenu(false)}>
                             <img src={offstore} className='w-full h-full' alt="Official Store Logo" />
                         </Link>
                     </div>
 
-                    <ul className='hidden md:flex items-center gap-4 text-[13px] text-black font-bold'>
+                    <ul className='hidden md:flex items-center gap-2 min-[800px]:gap-4 text-[13px] text-black font-bold'>
                         {menuConfig.map((item) => (
                             <li key={item.id} className='relative group py-2'>
                                 <Link
@@ -156,7 +156,7 @@ function Header() {
                 </div>
 
                 {/* SAĞ İKONLAR VƏ MOBİL BARS/X DÜYMƏSİ */}
-                <div className='flex items-center gap-5 font-black text-2xl cursor-pointer z-50'>
+                <div className='flex items-center gap-3 font-black text-2xl cursor-pointer z-50'>
                     <Link to="/search">
                         <PiMagnifyingGlassBold className='hover:opacity-70 transition-opacity' />
                     </Link>
