@@ -96,12 +96,12 @@ export default function Cart() {
                                 <span className="text-xl font-black text-black">AZN {totalPrice.toFixed(2)}</span>
                             </div>
                         </div>
-                        <button
-                            onClick={() => alert("Sifariş təsdiqləndi!")}
-                            className="w-full bg-black text-white font-bold py-4 uppercase text-sm hover:bg-gray-800 transition-colors cursor-pointer text-center"
+                        <Link
+                            to="/checkout"
+                            className="block w-full bg-black text-white font-bold py-4 uppercase text-sm hover:bg-gray-800 transition-colors cursor-pointer text-center"
                         >
-                            Yoxlama
-                        </button>
+                            Ödənİş Et
+                        </Link>
                     </div>
                 </div>
             )}

@@ -98,12 +98,13 @@ export default function CartDrawer({ isOpen, onClose }) {
                             >
                                 Səbətə Get
                             </Link>
+                            <Link to="/checkout" onClick={onClose}>
                             <button
-                                onClick={() => alert("Ödəniş səhifəsinə keçid")}
                                 className="w-full bg-black text-white font-bold py-3 text-xs uppercase hover:bg-gray-800 transition-colors cursor-pointer"
                             >
-                                AI AZN {totalPrice.toFixed(2)}
+                                Al AZN {totalPrice.toFixed(2)}
                             </button>
+                            </Link>
                         </div>
                     )}
 
