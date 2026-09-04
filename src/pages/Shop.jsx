@@ -8,10 +8,13 @@ import { AllProducts } from '../data/products';
 import SortProducts from '../components/SortProducts';
 
 export default function Shop() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const categoryParam = searchParams.get("category");
     const subcategoryParam = searchParams.get("subcategory");
     const typeParam = searchParams.get("type");
+    
+    // Sıralama parametrini birbaşa URL-dən oxuyuruq, yoxdursa default dəyəri veririk
+    const sortOption = searchParams.get("sort") || "Endirim dərəcəsi azalır";
 
     // DETALLI YOXLAMA: Parametrlərdən hər hansı biri saxtadırsa 404-ə yönləndirir
     if (categoryParam || subcategoryParam || typeParam) {
@@ -33,7 +36,14 @@ export default function Shop() {
     }
 
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
-    const [sortOption, setSortOption] = useState("Endirim dərəcəsi azalır");
+
+    // Sıralama dəyişəndə URL-ə yazırıq ki, refresh atanda silinməsin
+    const setSortOption = (newSort) => {
+        setSearchParams((prev) => {
+            prev.set("sort", newSort);
+            return prev;
+        });
+    };
 
     let sidebarItems = [];
     let filterKey = "";
@@ -106,7 +116,7 @@ export default function Shop() {
                             </h1>
                         </div>
 
-                        {/* MOBİL VƏ DESKTOP ÜÇÜN BÜTÜN DÜYMƏLƏR BURadADIR */}
+                        {/* MOBİL VƏ DESKTOP ÜÇÜN BÜTÜN DÜYMƏLƏR BURADADIR */}
                         <div className="flex items-center gap-4 text-sm font-bold text-gray-700 w-full md:w-auto justify-between md:justify-end">
 
                             {/* MOBİL DÜYMƏSİ: Həmişə görünəcək */}

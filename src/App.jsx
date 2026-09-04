@@ -14,6 +14,7 @@ import Register from './pages/Register';
 import ProductDetails from './pages/ProductDetails';
 import Wishlist from './pages/Wishlist';
 import { WishlistProvider } from './context/WishlistContext';
+import ContactUs from './pages/ContactUs';
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
 
               <Route path="/search" element={<Search />} />
               <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/contactus" element={<ContactUs/>} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/shipping-returns" element={<ShippingReturns />} />
               <Route path="/login" element={<Login />} />

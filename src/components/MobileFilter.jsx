@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
 
 export default function MobileFilter({
     isOpen,
     onClose,
     sortOptionsList,
-    sortOption,
-    setSortOption,
     hasSidebar,
     sidebarItems,
     filterKey,
@@ -18,6 +16,20 @@ export default function MobileFilter({
     selectedCategories,
     handleCategoryCheckbox
 }) {
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // Cari seçilmiş sıralamanı URL-dən oxuyuruq
+    const currentSort = searchParams.get('sort') || sortOptionsList[0];
+
+    // Sıralama dəyişəndə URL-ə yazırıq
+    const handleSortChange = (opt) => {
+        setSearchParams((prev) => {
+            prev.set('sort', opt);
+            return prev;
+        });
+        onClose();
+    };
+
     return (
         <div className={`fixed inset-0 z-50 bg-white overflow-y-auto md:hidden flex flex-col p-6 transition-all duration-300 ease-in-out ${isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-full pointer-events-none"}`}>
 
@@ -38,11 +50,8 @@ export default function MobileFilter({
                             <input
                                 type="radio"
                                 name="mobileSort"
-                                checked={sortOption === opt}
-                                onChange={() => {
-                                    setSortOption(opt);
-                                    onClose();
-                                }}
+                                checked={currentSort === opt}
+                                onChange={() => handleSortChange(opt)}
                                 className="w-4 h-4 accent-black"
                             />
                             {opt}
