@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,11 @@ export default function Checkout() {
 
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
+
+    // Səhifə statusu dəyişən kimi (təsdiq olunanda) pəncərəni avtomatik yuxarı qaldırır
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [submitted]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -157,7 +162,7 @@ export default function Checkout() {
                         type="submit"
                         className="w-full bg-black text-white font-bold py-4 uppercase text-sm hover:bg-gray-800 transition-colors cursor-pointer"
                     >
-                        Sifarişi Təsdiq Et
+                        Sİfarİşİ Təsdİq Et
                     </button>
                 </form>
 

@@ -62,13 +62,19 @@ export default function CartDrawer({ isOpen, onClose }) {
 
                                 return (
                                     <div key={item.cartId} className="flex gap-4 pb-4 border-b border-gray-100 items-start relative">
-                                        <img
-                                            src={item.images[0]}
-                                            alt={item.title}
-                                            className="w-16 h-20 object-contain bg-gray-50 p-1 shrink-0"
-                                        />
+                                        {/* Şəkilə kliklədikdə detallar səhifəsinə gedir və drawer bağlanır */}
+                                        <Link to={`/product/${item.slug || item.id}`} onClick={onClose} className="shrink-0">
+                                            <img
+                                                src={item.images[0]}
+                                                alt={item.title}
+                                                className="w-16 h-20 object-contain bg-gray-50 p-1 hover:opacity-80 transition-opacity"
+                                            />
+                                        </Link>
                                         <div className="flex-1 pr-2">
-                                            <h4 className="text-xs font-bold text-black leading-snug mb-1">{item.title}</h4>
+                                            {/* Ada kliklədikdə detallar səhifəsinə gedir və drawer bağlanır */}
+                                            <Link to={`/product/${item.slug || item.id}`} onClick={onClose}>
+                                                <h4 className="text-xs font-bold text-black leading-snug mb-1 hover:underline">{item.title}</h4>
+                                            </Link>
                                             <p className="text-xs text-gray-500 mb-0.5">Ədəd: {item.quantity}</p>
                                             {item.selectedSize && <p className="text-xs text-gray-500 mb-0.5">Ölçü: {item.selectedSize}</p>}
                                             {item.customName && <p className="text-xs text-gray-500 mb-0.5">Ad - {item.customName}</p>}
@@ -98,12 +104,12 @@ export default function CartDrawer({ isOpen, onClose }) {
                             >
                                 Səbətə Get
                             </Link>
-                            <Link to="/checkout" onClick={onClose}>
-                            <button
-                                className="w-full bg-black text-white font-bold py-3 text-xs uppercase hover:bg-gray-800 transition-colors cursor-pointer"
-                            >
-                                Al AZN {totalPrice.toFixed(2)}
-                            </button>
+                            <Link to="/checkout" onClick={onClose} className="block w-full">
+                                <button
+                                    className="w-full bg-black text-white font-bold py-3 text-xs uppercase hover:bg-gray-800 transition-colors cursor-pointer"
+                                >
+                                    Al AZN {totalPrice.toFixed(2)}
+                                </button>
                             </Link>
                         </div>
                     )}
