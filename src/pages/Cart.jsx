@@ -42,13 +42,19 @@ export default function Cart() {
                             return (
                                 <div key={item.cartId} className="py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                     <div className="flex items-center gap-6">
-                                        <img
-                                            src={item.images[0]}
-                                            alt={item.title}
-                                            className="w-24 h-28 object-contain bg-gray-50 p-2 border border-gray-100"
-                                        />
+                                        {/* Şəkilə kliklədikdə keçid */}
+                                        <Link to={`/product/${item.slug || item.id}`} className="shrink-0">
+                                            <img
+                                                src={item.images[0]}
+                                                alt={item.title}
+                                                className="w-24 h-28 object-contain bg-gray-50 p-2 border border-gray-100 hover:opacity-80 transition-opacity"
+                                            />
+                                        </Link>
                                         <div>
-                                            <h3 className="text-base font-bold text-black mb-1">{item.title}</h3>
+                                            {/* Ada kliklədikdə keçid */}
+                                            <Link to={`/product/${item.slug || item.id}`}>
+                                                <h3 className="text-base font-bold text-black mb-1 hover:underline">{item.title}</h3>
+                                            </Link>
                                             {item.selectedSize && <p className="text-xs text-gray-500 mb-0.5">Ölçü: {item.selectedSize}</p>}
                                             {item.customName && <p className="text-xs text-gray-500 mb-0.5">Ad - {item.customName}</p>}
                                             {item.customNumber && <p className="text-xs text-gray-500">Nömrə - {item.customNumber}</p>}

@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Checkout() {
     const { cart } = useContext(CartContext);
-    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -14,11 +13,14 @@ export default function Checkout() {
         note: ''
     });
 
+    const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+        // İstifadəçi yazdıqca həmin sahənin xətasını təmizləyirik
+        setErrors(prev => ({ ...prev, [name]: '' }));
     };
 
     const totalPrice = cart.reduce((total, item) => {
@@ -34,8 +36,34 @@ export default function Checkout() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Burada sifarişi backendə göndərmək və ya localStorage-də saxlamaq olar
-        setSubmitted(true);
+        let newErrors = {};
+
+        if (!formData.name.trim()) {
+            newErrors.name = 'Ad boş ola bilməz';
+        }
+
+        if (!formData.surname.trim()) {
+            newErrors.surname = 'Soyad boş ola bilməz';
+        }
+
+        // Azərbaycan telefon nömrəsi üçün sadə regex yoxlaması (məs: 0501234567 və ya +994...)
+        const phoneRegex = /^(\+994|0)?(50|51|55|70|71|77|99|10)[0-9]{7}$/;
+        const cleanPhone = formData.phone.replace(/\s+/g, '');
+        if (!formData.phone.trim()) {
+            newErrors.phone = 'Əlaqə nömrəsi boş ola bilməz';
+        } else if (!phoneRegex.test(cleanPhone)) {
+            newErrors.phone = 'Düzgün nömrə daxil edin (məs: 0501234567)';
+        }
+
+        if (!formData.address.trim()) {
+            newErrors.address = 'Çatdırılma ünvanı boş ola bilməz';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+        } else {
+            setSubmitted(true);
+        }
     };
 
     if (submitted) {
@@ -56,58 +84,62 @@ export default function Checkout() {
 
             <div className="flex flex-col lg:flex-row gap-12">
                 {/* Əlaqə və Ünvan Formu */}
-                <form onSubmit={handleSubmit} className="w-full lg:w-2/3 space-y-6">
+                <form onSubmit={handleSubmit} className="w-full lg:w-2/3 space-y-6" noValidate>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-xs font-bold text-black mb-2">Ad *</label>
                             <input
                                 type="text"
                                 name="name"
-                                required
                                 value={formData.name}
                                 onChange={handleChange}
-                                className="w-full border border-gray-300 p-3.5 outline-none focus:border-black text-sm"
+                                className={`w-full border p-3.5 outline-none text-sm bg-white ${errors.name ? 'border-red-500' : 'border-gray-300 focus:border-black'
+                                    }`}
                                 placeholder="Adınız"
                             />
+                            {errors.name && <span className="text-red-500 text-xs mt-1 block">{errors.name}</span>}
                         </div>
                         <div>
                             <label className="block text-xs font-bold text-black mb-2">Soyad *</label>
                             <input
                                 type="text"
                                 name="surname"
-                                required
                                 value={formData.surname}
                                 onChange={handleChange}
-                                className="w-full border border-gray-300 p-3.5 outline-none focus:border-black text-sm"
+                                className={`w-full border p-3.5 outline-none text-sm bg-white ${errors.surname ? 'border-red-500' : 'border-gray-300 focus:border-black'
+                                    }`}
                                 placeholder="Soyadınız"
                             />
+                            {errors.surname && <span className="text-red-500 text-xs mt-1 block">{errors.surname}</span>}
                         </div>
                     </div>
 
                     <div>
                         <label className="block text-xs font-bold text-black mb-2">Əlaqə nömrəsi *</label>
                         <input
-                            type="tel"
+                            type="text"
                             name="phone"
-                            required
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full border border-gray-300 p-3.5 outline-none focus:border-black text-sm"
-                            placeholder="+994 XX XXX XX XX"
+                            className={`w-full border p-3.5 outline-none text-sm bg-white ${errors.phone ? 'border-red-500' : 'border-gray-300 focus:border-black'
+                                }`}
+                            placeholder="0501234567 və ya +994..."
                         />
+                        {errors.phone && <span className="text-red-500 text-xs mt-1 block">{errors.phone}</span>}
                     </div>
 
                     <div>
                         <label className="block text-xs font-bold text-black mb-2">Çatdırılma Ünvanı *</label>
                         <textarea
                             name="address"
-                            required
                             rows="3"
                             value={formData.address}
                             onChange={handleChange}
-                            className="w-full border border-gray-300 p-3.5 outline-none focus:border-black text-sm resize-none"
+                            className={`w-full border p-3.5 outline-none text-sm resize-none bg-white ${errors.address ? 'border-red-500' : 'border-gray-300 focus:border-black'
+                                }`}
                             placeholder="Şəhər, küçə, bina, mənzil"
                         />
+                        {errors.address && <span className="text-red-500 text-xs mt-1 block">{errors.address}</span>}
                     </div>
 
                     <div>
@@ -117,7 +149,7 @@ export default function Checkout() {
                             rows="2"
                             value={formData.note}
                             onChange={handleChange}
-                            className="w-full border border-gray-300 p-3.5 outline-none focus:border-black text-sm resize-none"
+                            className="w-full border border-gray-300 p-3.5 outline-none focus:border-black text-sm resize-none bg-white"
                             placeholder="Kuryer üçün əlavə məlumat..."
                         />
                     </div>
