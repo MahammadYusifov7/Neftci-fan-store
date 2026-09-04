@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { FiSearch, FiChevronDown } from "react-icons/fi";
 import ProductCard from '../components/ProductCard';
 import MobileFilter from '../components/MobileFilter';
@@ -15,19 +16,54 @@ const categoriesList = [
 ];
 
 export default function Search() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [sortOption, setSortOption] = useState("Sonuncu əlavə edilən");
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // URL-dən cari axtarış və kateqoriyaları oxuyuruq
+    const searchQuery = searchParams.get("q") || "";
+    const selectedCategories = searchParams.get("category") ? searchParams.get("category").split(",") : [];
+    const sortOption = searchParams.get("sort") || "Sonuncu əlavə edilən";
+
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
     const [isSidebarCategoriesOpen, setIsSidebarCategoriesOpen] = useState(true);
 
-    // Checkbox seçimlərini idarə edən funksiya
+    // Axtarış inputu dəyişəndə URL-i yeniləyirik
+    const handleSearchChange = (e) => {
+        const val = e.target.value;
+        setSearchParams((prev) => {
+            if (val.trim()) {
+                prev.set("q", val);
+            } else {
+                prev.delete("q");
+            }
+            return prev;
+        });
+    };
+
+    // Checkbox seçimlərini URL ilə idarə edən funksiya
     const handleCategoryCheckbox = (catValue) => {
-        if (selectedCategories.includes(catValue)) {
-            setSelectedCategories(selectedCategories.filter(c => c !== catValue));
+        let updatedCategories = [...selectedCategories];
+        if (updatedCategories.includes(catValue)) {
+            updatedCategories = updatedCategories.filter(c => c !== catValue);
         } else {
-            setSelectedCategories([...selectedCategories, catValue]);
+            updatedCategories.push(catValue);
         }
+
+        setSearchParams((prev) => {
+            if (updatedCategories.length > 0) {
+                prev.set("category", updatedCategories.join(","));
+            } else {
+                prev.delete("category");
+            }
+            return prev;
+        });
+    };
+
+    // Sıralama dəyişəndə URL-ə yazırıq
+    const handleSortChange = (newSort) => {
+        setSearchParams((prev) => {
+            prev.set("sort", newSort);
+            return prev;
+        });
     };
 
     // 1. Filtrləmə məntiqi
@@ -60,13 +96,13 @@ export default function Search() {
                     Axtar
                 </h1>
 
-                {/* Mobil üçün Axtarış Sətri (Mobildə tam en, Desktopda sol menyunun enində olacaq) */}
+                {/* Mobil üçün Axtarış Sətri */}
                 <div className="md:hidden relative mb-6">
                     <input
                         type="text"
                         placeholder="Axtarış"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={handleSearchChange}
                         className="w-full border-b border-gray-400 py-2 pr-10 text-sm focus:outline-none focus:border-black bg-transparent"
                     />
                     <FiSearch className="absolute right-2 top-3 text-gray-500 text-lg" />
@@ -79,7 +115,7 @@ export default function Search() {
                         onClick={() => setMobileFilterOpen(true)}
                         className="flex items-center gap-2 bg-white border border-black px-4 py-2 text-xs uppercase text-black font-bold cursor-pointer"
                     >
-                        Filtr ⚙️
+                        Filtr
                     </button>
                 </div>
 
@@ -95,7 +131,7 @@ export default function Search() {
                                     type="text"
                                     placeholder="Axtarış"
                                     value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onChange={handleSearchChange}
                                     className="w-full border-b border-gray-400 py-2 pr-10 text-sm focus:outline-none focus:border-black bg-transparent"
                                 />
                                 <FiSearch className="absolute right-2 top-3 text-gray-500 text-lg" />
@@ -130,9 +166,8 @@ export default function Search() {
                     {/* MƏHSUL QRİDİ VƏ DESKTOP SIRALAMA */}
                     <main className="w-full md:w-3/4 transition-all duration-300">
 
-                        {/* Desktop üçün yuxarı sağdakı Sıralama və Filtr mətni */}
                         <div className="hidden md:flex justify-end items-center gap-6 mb-6 text-sm font-bold text-gray-700">
-                            <SortProducts sortOption={sortOption} setSortOption={setSortOption} />
+                            <SortProducts sortOption={sortOption} setSortOption={handleSortChange} />
                         </div>
 
                         {currentProducts.length > 0 ? (
@@ -157,7 +192,7 @@ export default function Search() {
                 onClose={() => setMobileFilterOpen(false)}
                 sortOptionsList={sortOptionsList}
                 sortOption={sortOption}
-                setSortOption={setSortOption}
+                setSortOption={handleSortChange}
                 hasSidebar={true}
                 isGeneralSearch={true}
                 categoriesList={categoriesList}

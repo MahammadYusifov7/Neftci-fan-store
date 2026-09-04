@@ -22,3 +22,13 @@
 .animate-marquee:hover {
     animation-play-state: paused;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

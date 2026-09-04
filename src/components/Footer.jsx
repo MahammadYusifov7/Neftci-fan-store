@@ -109,7 +109,7 @@ function Footer() {
           <ul className="flex flex-col gap-2 md:gap-4 cursor-pointer">
             <li><Link to="/aboutus">bizim haqqımızda</Link></li>
             <li><Link to="/search">mağaza</Link></li>
-            <li><Link to="/contactus">bizimlə əlaqə</Link></li>
+            <li><Link to="/contactus">bizimlə əlaqə</Link></li> 
           </ul>
 
           <ul className="flex flex-col gap-2 md:gap-4 cursor-pointer">

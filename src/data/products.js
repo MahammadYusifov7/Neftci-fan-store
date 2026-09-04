@@ -763,7 +763,7 @@ Səfər dəstimizdə 1979-cu illərə göndərmə var. “Neftçi”nin 1979-cu 
     },
     {
         id: 60,
-        title: "Neftçi 2024/25 Uşaq Səfər Forması",
+        title: "Neftçi 2024/25 Uşaq Alternativ Forması",
         category: "outlet",
         subcategory: "",
         price: 90.00,

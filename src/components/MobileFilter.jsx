@@ -18,10 +18,8 @@ export default function MobileFilter({
 }) {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // Cari seçilmiş sıralamanı URL-dən oxuyuruq
     const currentSort = searchParams.get('sort') || sortOptionsList[0];
 
-    // Sıralama dəyişəndə URL-ə yazırıq
     const handleSortChange = (opt) => {
         setSearchParams((prev) => {
             prev.set('sort', opt);

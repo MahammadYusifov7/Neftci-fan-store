@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AllProducts } from '../data/products';
 import ProductSwiper from "../components/ProductSwiper";
 import VerticalSwiper from "../components/VerticalSwiper";
 import { WishlistContext } from '../context/WishlistContext';
+import { CartContext } from '../context/CartContext';
+import CartDrawer from '../components/CartDrawer';
 import { BiHeart, BiSolidHeart } from 'react-icons/bi';
 
 function ProductDetails() {
@@ -16,17 +18,29 @@ function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
     const [customName, setCustomName] = useState('');
     const [customNumber, setCustomNumber] = useState('');
+    const [isCartOpen, setIsCartOpen] = useState(false); // Səbət panelinin açılıb-bağlanması üçün
 
-    // Burada addToWishlist və removeFromWishlist əvəzinə toggleWishlist çəkilir
     const { wishlist, toggleWishlist } = useContext(WishlistContext);
+    const { addToCart } = useContext(CartContext);
 
-    // Məhsul tapılmadıqda göstərilən yoxlama
+    // Dinamik tab başlığı
+    useEffect(() => {
+        if (product) {
+            document.title = `${product.title} - Neftçi Official Store`;
+        }
+        return () => {
+            document.title = 'Neftçi Official Store - Rəsmi Mağaza';
+        };
+    }, [product]);
+
     if (!product) {
         return <h2 className="text-center mt-20 text-2xl font-bold">Məhsul tapılmadı!</h2>;
     }
 
     const isWishlisted = wishlist.some(item => item.id === product.id);
-    const isForma = product.category?.toLowerCase() === 'formalar';
+    const isForma = product.title?.toLowerCase().includes('forma') &&
+        !product.title?.toLowerCase().includes('şort') &&
+        !product.subcategory?.toLowerCase().includes('şort');
 
     const hasDiscount = product.discountPercent && product.discountPercent > 0;
     const discountedPrice = hasDiscount
@@ -35,6 +49,12 @@ function ProductDetails() {
 
     const handleWishlistClick = () => {
         toggleWishlist(product);
+    };
+
+    // Səbətə əlavə et düyməsi kliklənəndə
+    const handleAddToCart = () => {
+        addToCart(product, size, quantity, customName, customNumber);
+        setIsCartOpen(true); // Səbət panelini açırıq
     };
 
     return (
@@ -81,7 +101,7 @@ function ProductDetails() {
                     <h1 className="text-2xl md:text-[28px] font-normal text-black mb-2 leading-tight">
                         {product.title}
                     </h1>
-                    {/* QİYMƏT HİSSƏSİ (Endirim varsa köhnə və yeni qiymət yan-yana görünür) */}
+                    {/* QİYMƏT HİSSƏSİ */}
                     <div className="flex items-center gap-3 mb-8">
                         {hasDiscount ? (
                             <>
@@ -102,7 +122,6 @@ function ProductDetails() {
                         )}
                     </div>
 
-                    {/* BƏDƏN SEÇİMİ */}
                     {product.sizes && product.sizes.length > 0 && (
                         <div className="mb-6">
                             <label className="block text-[13px] font-bold text-black mb-2">Ölçü:</label>
@@ -169,7 +188,10 @@ function ProductDetails() {
 
                     {/* SƏBƏTƏ AT VƏ WİSHLİST DÜYMƏLƏRİ */}
                     <div className="flex items-center gap-4 mb-10 mt-2">
-                        <button className="flex-1 bg-black text-white font-bold py-4 hover:bg-gray-800 transition-colors text-sm">
+                        <button
+                            onClick={handleAddToCart}
+                            className="flex-1 bg-black text-white font-bold py-4 hover:bg-gray-800 transition-colors text-sm cursor-pointer"
+                        >
                             Səbətə əlavə et
                         </button>
 
@@ -199,6 +221,9 @@ function ProductDetails() {
                 </div>
 
             </div>
+
+            {/* Səbət Drawer Paneli */}
+            <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
     );
 }

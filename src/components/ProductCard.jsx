@@ -1,13 +1,17 @@
 import { useState, useContext } from 'react';
 import { BiHeart, BiSolidHeart } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { WishlistContext } from '../context/WishlistContext'; // Context yolunu proyektinə uyğunlasdır
+import { WishlistContext } from '../context/WishlistContext';
+import ViewModal from './ViewModal';
 
 export default function ProductCard({ product }) {
     const { title, slug, price, discountPercent, images, subcategory } = product;
 
     const [modalOpen, setModalOpen] = useState(false);
-
+    const handleOpenModal = (e) => {
+        e.preventDefault();
+        setModalOpen(true);
+    }
     // Qlobal Context-dən məlumatları və funksiyanı çəkirik
     const { wishlist, toggleWishlist } = useContext(WishlistContext);
 
@@ -89,10 +93,11 @@ export default function ProductCard({ product }) {
                 </div>
 
                 <div className='mt-auto flex justify-center'>
-                    <button className='border bg-white text-black font-bold text-sm px-7 py-2 cursor-pointer m-2 hover:text-white hover:bg-black duration-300 transition-all'>Səbətə əlavə et</button>
+                    <button onClick={handleOpenModal} className='border bg-white text-black font-bold text-sm px-4 py-2 cursor-pointer m-2 hover:text-white hover:bg-black duration-300 transition-all'>Səbətə əlavə et</button>
                 </div>
             </div>
 
+            <ViewModal isOpen={modalOpen} onClose={() => setModalOpen(false)} product={product} />
         </div>
     );
 }

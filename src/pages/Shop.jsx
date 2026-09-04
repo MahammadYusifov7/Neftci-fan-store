@@ -124,7 +124,7 @@ export default function Shop() {
                                 onClick={() => setMobileFilterOpen(true)}
                                 className="md:hidden flex items-center gap-2 bg-white border border-black px-4 py-2 text-xs uppercase text-black font-bold cursor-pointer"
                             >
-                                {hasSidebar ? "Filtr ⚙️" : "Sırala ↕️"}
+                                {hasSidebar ? "Filtr " : "Sırala "}
                             </button>
 
                             {/* DESKTOP SIRALAMA DÜYMƏSİ */}

@@ -10,6 +10,8 @@ import { IoMdClose } from "react-icons/io";
 import { BiHeart } from 'react-icons/bi';
 import { useContext } from 'react';
 import { WishlistContext } from '../context/WishlistContext';
+import CartDrawer from './CartDrawer';
+import { CartContext } from '../context/CartContext';
 
 const menuConfig = [
     {
@@ -81,8 +83,10 @@ const menuConfig = [
 
 function Header() {
     const [openmenu, setOpenmenu] = useState(false);
+    const [isCartOpen, setIsCartOpen] = useState(false);
     const [activeSubMenu, setActiveSubMenu] = useState(null);
     const { wishlist } = useContext(WishlistContext);
+    const { cart } = useContext(CartContext);
 
     const toggleMobileMenu = () => {
         setOpenmenu(prev => !prev);
@@ -164,8 +168,12 @@ function Header() {
                         <FaRegUser className='hover:opacity-70 transition-opacity' />
                     </Link>
                     <div className='relative flex items-center'>
-                        <SlBasket className='hover:opacity-70 transition-opacity' />
-                        <span className='absolute -top-2.5 -right-3 text-[11px] font-bold text-black px-1'>0</span>
+                        <SlBasket onClick={() => setIsCartOpen(true)} className='hover:opacity-70 transition-opacity' />
+                        {cart.length > 0 && (
+                                <span className='absolute -top-2.5 -right-3 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm'>
+                                    {cart.length}
+                                </span>
+                            )}
                     </div>
 
                     <div className='relative flex items-center'>
@@ -178,7 +186,7 @@ function Header() {
                             )}
                         </Link>
                     </div>
-                    
+
                     <button onClick={toggleMobileMenu} className='md:hidden relative w-9 h-9 flex items-center justify-center cursor-pointer focus:outline-none'>
                         <HiBars2 className={`absolute text-3xl transition-all duration-300 ease-in-out ${openmenu ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"}`} />
                         <div className={`absolute border border-black p-1 rounded-sm transition-all duration-300 ease-in-out ${openmenu ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"}`}>
@@ -275,6 +283,7 @@ function Header() {
                     </div>
                 </div>
             </nav>
+            <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </>
     );
 }
