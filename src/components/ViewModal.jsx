@@ -148,7 +148,9 @@ export default function ViewModal({ isOpen, onClose, product }) {
                             <div>
                                 <label className="block text-xs font-bold text-gray-700 mb-1">Nömrə (+ AZN 5.00)</label>
                                 <input
-                                    type="text"
+                                    type="number"
+                                    min={1}
+                                    max={99}
                                     placeholder="Nömrə"
                                     value={customNumber}
                                     onChange={(e) => setCustomNumber(e.target.value)}

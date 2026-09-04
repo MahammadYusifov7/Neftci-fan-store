@@ -3,7 +3,7 @@ import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
 export default function Checkout() {
-    const { cart } = useContext(CartContext);
+    const { cart, clearCart } = useContext(CartContext);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -61,6 +61,7 @@ export default function Checkout() {
             setErrors(newErrors);
         } else {
             setSubmitted(true);
+            clearCart();
         }
     };
 
