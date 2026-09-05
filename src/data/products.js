@@ -1011,8 +1011,6 @@ Alernativ dəstimizdə 1990-cı illərə göndərmə var. 1998/99 mövsümündə
 
 
 
-
-
 export const AllProducts = products.map(product => ({
     ...product,
     slug: generateSlug(product.title)
