@@ -16,7 +16,6 @@ export default function Checkout() {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
 
-    // Səhifə statusu dəyişən kimi (təsdiq olunanda) pəncərəni avtomatik yuxarı qaldırır
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [submitted]);

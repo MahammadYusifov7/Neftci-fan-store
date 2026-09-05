@@ -2,19 +2,7 @@ import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
 
-export default function MobileFilter({
-    isOpen,
-    onClose,
-    sortOptionsList,
-    hasSidebar,
-    sidebarItems,
-    filterKey,
-    categoryParam,
-    subcategoryParam,
-    isGeneralSearch,
-    categoriesList,
-    selectedCategories,
-    handleCategoryCheckbox
+export default function MobileFilter({ isOpen, onClose, sortOptionsList, hasSidebar, sidebarItems, filterKey, categoryParam, subcategoryParam, isGeneralSearch, categoriesList, selectedCategories, handleCategoryCheckbox
 }) {
     const [searchParams, setSearchParams] = useSearchParams();
 

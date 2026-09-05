@@ -23,6 +23,8 @@
     animation-play-state: paused;
 }
 
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;

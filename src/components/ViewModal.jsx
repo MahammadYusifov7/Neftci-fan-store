@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
-import { BiX, BiChevronLeft, BiChevronRight, BiSearch } from 'react-icons/bi';
+import { BiX, BiChevronLeft, BiChevronRight} from 'react-icons/bi';
 
 export default function ViewModal({ isOpen, onClose, product }) {
     const { addToCart } = useContext(CartContext);
@@ -61,7 +61,6 @@ export default function ViewModal({ isOpen, onClose, product }) {
                     <BiX />
                 </button>
 
-                {/* SOL TƏRƏF: Şəkil Slayderi */}
                 <div className="w-full md:w-1/2 relative bg-[#f8f8f8] min-h-[300px] flex items-center justify-center p-8 group">
                     <img
                         key={currentImageIndex}
@@ -85,7 +84,6 @@ export default function ViewModal({ isOpen, onClose, product }) {
                     )}
                 </div>
 
-                {/* SAĞ TƏRƏF: Məlumatlar */}
                 <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
                     <h2 className="text-2xl md:text-[26px] font-normal text-black mb-4 leading-tight pr-6">
                         {product.title}

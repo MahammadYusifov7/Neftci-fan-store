@@ -40,14 +40,14 @@ export default function ProductCard({ product }) {
                 )}
             </button>
 
-            {/* 1. ENDİRİM BİRKASI */}
+            {/* 1. ENDİRİM */}
             {hasDiscount && (
                 <span className="absolute top-3 right-0 bg-[#ec1301] text-white text-lg font-bold px-2 py-1 z-10">
                     %{discountPercent}
                 </span>
             )}
 
-            {/* 2. ŞƏKİL HİSSƏSİ */}
+            {/* 2. ŞƏKİL */}
             <Link to={`/product/${slug}`} className="relative w-full aspect-[4/5] bg-[#f8f8f8] overflow-hidden block">
                 <img
                     src={images[0]}
@@ -65,7 +65,7 @@ export default function ProductCard({ product }) {
                 )}
             </Link>
 
-            {/* 3. MƏLUMAT HİSSƏSİ */}
+            {/* 3. MƏLUMAT */}
             <div className="pt-4 flex flex-col grow">
                 {subcategory && (
                     <span className="text-[10px] sm:text-[11px] text-gray-500 uppercase tracking-widest mb-1.5 block">

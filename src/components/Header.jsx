@@ -167,10 +167,10 @@ function Header() {
                     <div className='relative flex items-center'>
                         <SlBasket onClick={() => setIsCartOpen(true)} className='hover:opacity-70 transition-opacity' />
                         {cart.length > 0 && (
-                                <span className='absolute -top-2.5 -right-3 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm'>
-                                    {cart.length}
-                                </span>
-                            )}
+                            <span className='absolute -top-2.5 -right-3 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm'>
+                                {cart.length}
+                            </span>
+                        )}
                     </div>
 
                     <div className='relative flex items-center'>
@@ -232,7 +232,7 @@ function Header() {
                             </ul>
                         </div>
 
-                        {/* 2. ALT MENYU (Və 3-cü pillə Akkordionları) */}
+                        {/* 2. ALT MENYU */}
                         <div className='w-1/2 h-full pt-8 px-8 overflow-y-auto pb-20'>
                             <div className='w-full max-w-xs mx-auto flex flex-col gap-7'>
                                 <button onClick={() => setActiveSubMenu(null)} className='flex items-center gap-3 font-bold text-base text-black cursor-pointer mb-2'>
@@ -243,7 +243,6 @@ function Header() {
                                 <ul className='flex flex-col gap-6 font-bold text-[15px] text-black'>
                                     {activeMenuObj?.subcategories.map((sub, index) => (
                                         <li key={index}>
-                                            {/* Əgər 3-cü pillə (types) varsa, HTML <details> tagi ilə Akkordion yaradırıq */}
                                             {sub.types ? (
                                                 <details className='group'>
                                                     <summary className='flex items-center justify-between w-full cursor-pointer list-none [&::-webkit-details-marker]:hidden'>

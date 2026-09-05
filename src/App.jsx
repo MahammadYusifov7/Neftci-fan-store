@@ -23,11 +23,12 @@ export default function App() {
   return (
     <>
       <WishlistProvider>
-
         <CartProvider>
+
           <div className='flex flex-col min-h-screen'>
 
             <ScrollToTop />
+            
             <Header />
 
             <div className='grow pt-20'>
@@ -57,7 +58,6 @@ export default function App() {
           </div>
 
         </CartProvider>
-
       </WishlistProvider>
     </>
   );

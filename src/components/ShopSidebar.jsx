@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiChevronDown } from "react-icons/fi";
 
-export default function ShopSidebar({ sidebarItems, filterKey, categoryParam, subcategoryParam, typeParam, formatCategoryName }) {
+export default function ShopSidebar({ sidebarItems, filterKey, categoryParam, subcategoryParam, typeParam }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (

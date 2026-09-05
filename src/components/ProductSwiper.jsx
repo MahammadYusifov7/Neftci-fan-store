@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -53,13 +53,11 @@ export default function ProductSwiper({ images = [], productName = "Məhsul", th
                 </Swiper>
             </div>
 
-            {/* FULLSCREEN MODAL (Keçid effektləri ilə) */}
             <div 
                 className={`fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 transition-all duration-300 ease-in-out ${
                     isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                 }`}
             >
-                {/* Bağlamaq düyməsi */}
                 <button 
                     onClick={() => setIsOpen(false)}
                     className="absolute top-6 right-6 text-white text-4xl hover:opacity-70 transition-opacity cursor-pointer z-50"
@@ -67,7 +65,6 @@ export default function ProductSwiper({ images = [], productName = "Məhsul", th
                     <BiX />
                 </button>
 
-                {/* Böyüdülmüş şəkil (Yüngül scale effekti ilə açılır) */}
                 <div className={`relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center transition-transform duration-300 ease-in-out ${
                     isOpen ? 'scale-100' : 'scale-95'
                 }`}>

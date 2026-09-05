@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { BiX } from 'react-icons/bi';
 import { Link } from 'react-router-dom';

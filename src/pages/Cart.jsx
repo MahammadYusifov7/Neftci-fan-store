@@ -42,7 +42,6 @@ export default function Cart() {
                             return (
                                 <div key={item.cartId} className="py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                     <div className="flex items-center gap-6">
-                                        {/* Şəkilə kliklədikdə keçid */}
                                         <Link to={`/product/${item.slug || item.id}`} className="shrink-0">
                                             <img
                                                 src={item.images[0]}
@@ -51,7 +50,6 @@ export default function Cart() {
                                             />
                                         </Link>
                                         <div>
-                                            {/* Ada kliklədikdə keçid */}
                                             <Link to={`/product/${item.slug || item.id}`}>
                                                 <h3 className="text-base font-bold text-black mb-1 hover:underline">{item.title}</h3>
                                             </Link>
@@ -62,7 +60,6 @@ export default function Cart() {
                                     </div>
 
                                     <div className="flex items-center justify-between w-full sm:w-auto gap-8">
-                                        {/* Miqdar düymələri */}
                                         <div className="flex items-center border border-gray-300 px-3 py-1.5 gap-4">
                                             <button
                                                 onClick={() => updateQuantity(item.cartId, item.quantity - 1)}

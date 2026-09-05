@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { AllProducts } from '../data/products';
 import ProductSwiper from "../components/ProductSwiper";
 import VerticalSwiper from "../components/VerticalSwiper";
@@ -12,12 +12,15 @@ function ProductDetails() {
     const { slug } = useParams();
     const product = AllProducts.find(p => p.slug === slug || p.id.toString() === slug);
 
+    // Bütün Hook-lar şərtsiz şəkildə ən yuxarıda çağırılmalıdır
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+    // Əgər product yoxdursa, state-ləri boş saxlayırıq (error verməməsi üçün)
     const [size, setSize] = useState(product?.sizes ? product.sizes[0] : '');
     const [quantity, setQuantity] = useState(1);
     const [customName, setCustomName] = useState('');
     const [customNumber, setCustomNumber] = useState('');
-    const [isCartOpen, setIsCartOpen] = useState(false); // Səbət panelinin açılıb-bağlanması üçün
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     const { wishlist, toggleWishlist } = useContext(WishlistContext);
     const { addToCart } = useContext(CartContext);
@@ -31,8 +34,9 @@ function ProductDetails() {
         };
     }, [product]);
 
+    // Bütün Hook-lar icra olunduqdan sonra məhsulun varlığını yoxlayırıq
     if (!product) {
-        return <h2 className="text-center mt-20 text-2xl font-bold">Məhsul tapılmadı!</h2>;
+        return <Navigate to="/404" replace />;
     }
 
     const isWishlisted = wishlist.some(item => item.id === product.id);
@@ -51,7 +55,7 @@ function ProductDetails() {
 
     const handleAddToCart = () => {
         addToCart(product, size, quantity, customName, customNumber);
-        setIsCartOpen(true); 
+        setIsCartOpen(true);
     };
 
     return (
