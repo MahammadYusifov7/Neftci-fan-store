@@ -21,44 +21,37 @@ import Checkout from './pages/Checkout';
 
 export default function App() {
   return (
-    <>
-      <WishlistProvider>
-        <CartProvider>
 
-          <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col min-h-screen'>
 
-            <ScrollToTop />
-            
-            <Header />
+      <ScrollToTop />
 
-            <div className='grow pt-20'>
-              <Routes>
-                <Route path="/" element={<Home />} />
+      <Header />
 
-                <Route path="/products" element={<Shop />} />
-                <Route path="/product/:slug" element={<ProductDetails />} />
-                <Route path="/wishlist" element={<Wishlist />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/checkout' element={<Checkout />} />
+      <div className='grow pt-20'>
+        <Routes>
+          <Route path="/" element={<Home />} />
+
+          <Route path="/products" element={<Shop />} />
+          <Route path="/product/:slug" element={<ProductDetails />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/checkout' element={<Checkout />} />
 
 
-                <Route path="/search" element={<Search />} />
-                <Route path="/aboutus" element={<AboutUs />} />
-                <Route path="/contactus" element={<ContactUs />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/shipping-returns" element={<ShippingReturns />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="*" element={<Error />} />
-              </Routes>
-            </div>
+          <Route path="/search" element={<Search />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/shipping-returns" element={<ShippingReturns />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
 
-            <Footer />
+      <Footer />
 
-          </div>
-
-        </CartProvider>
-      </WishlistProvider>
-    </>
+    </div>
   );
 }

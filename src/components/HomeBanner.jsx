@@ -4,7 +4,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-
 import { AllProducts } from '../data/products';
 
 const alternativForma = AllProducts.find(p => p.id === 4);

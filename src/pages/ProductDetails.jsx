@@ -10,7 +10,7 @@ import { BiHeart, BiSolidHeart } from 'react-icons/bi';
 
 function ProductDetails() {
     const { slug } = useParams();
-    const product = AllProducts.find(p => p.slug === slug || p.id.toString() === slug);
+    const product = AllProducts.find(p => p.slug === slug);
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 

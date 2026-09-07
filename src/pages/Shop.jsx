@@ -12,7 +12,7 @@ export default function Shop() {
     const categoryParam = searchParams.get("category");
     const subcategoryParam = searchParams.get("subcategory");
     const typeParam = searchParams.get("type");
-    
+
     const sortOption = searchParams.get("sort") || "Endirim dərəcəsi azalır";
 
     if (categoryParam || subcategoryParam || typeParam) {

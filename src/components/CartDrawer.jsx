@@ -62,7 +62,6 @@ export default function CartDrawer({ isOpen, onClose }) {
 
                                 return (
                                     <div key={item.cartId} className="flex gap-4 pb-4 border-b border-gray-100 items-start relative">
-                                        {/* Şəkilə kliklədikdə detallar səhifəsinə gedir və drawer bağlanır */}
                                         <Link to={`/product/${item.slug || item.id}`} onClick={onClose} className="shrink-0">
                                             <img
                                                 src={item.images[0]}
@@ -71,7 +70,6 @@ export default function CartDrawer({ isOpen, onClose }) {
                                             />
                                         </Link>
                                         <div className="flex-1 pr-2">
-                                            {/* Ada kliklədikdə detallar səhifəsinə gedir və drawer bağlanır */}
                                             <Link to={`/product/${item.slug || item.id}`} onClick={onClose}>
                                                 <h4 className="text-xs font-bold text-black leading-snug mb-1 hover:underline">{item.title}</h4>
                                             </Link>
